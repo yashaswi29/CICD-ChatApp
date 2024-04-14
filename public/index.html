@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Local Chat</title>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-messages" id="chatMessages">
+      <!-- Chat messages will be displayed here -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type your message...">
+      <button id="sendButton">Send</button>
+      <!-- Button for manual sound playback -->
+      <button id="playSoundButton">Play Sound</button>
+    </div>
+  </div>
+  <!-- Include the socket.io library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <!-- Include your JavaScript file -->
+  <script src="script.js"></script>
+  <!-- Include the notification sound -->
+  <audio id="notificationSound">
+    <source src="notification.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>
