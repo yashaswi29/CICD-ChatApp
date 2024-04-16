@@ -1,13 +1,11 @@
 const express = require('express');
 const http = require('http');
-const socketIo = require('socket.io');
-const path = require('path');
+const socketIo = require('socket.io'); // Import the socket.io library
+const path = require('path'); // Import the path module
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
-
-let timer;
+const io = socketIo(server); // Create a socket.io instance using the server
 
 // Store active room connections
 const roomConnections = {};
@@ -17,10 +15,6 @@ io.on('connection', (socket) => {
     socket.join(room);
     roomConnections[room] = roomConnections[room] || [];
     roomConnections[room].push(socket);
-
-    // Reset the idle timer when a client joins the room
-    clearTimeout(timer);
-    timer = setTimeout(shutdownServer, 60000); // 1 minute idle timeout
   });
 
   socket.on('message', (data) => {
@@ -46,14 +40,13 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const PORT = process.env.PORT || 1234;
+const PORT = process.env.PORT || 12345;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  
+  // Automatically shut down the server after 60 seconds
+  setTimeout(() => {
+    console.log('Shutting down server...');
+    server.close();
+  }, 60000);
 });
-
-function shutdownServer() {
-  console.log('Server is shutting down due to inactivity.');
-  server.close(() => {
-    console.log('Server has been shut down.');
-  });
-}
