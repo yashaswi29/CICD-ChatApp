@@ -63,5 +63,5 @@ Our pipeline is the backbone of our software development process, automating tas
 
 ---
 
-**Start chatting and enjoy the real-time experience with ChatApp!**
+
 
