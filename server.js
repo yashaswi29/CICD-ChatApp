@@ -48,5 +48,5 @@ server.listen(PORT, () => {
   setTimeout(() => {
     console.log('Shutting down server...');
     server.close();
-  }, 60000);
+  }, 180000);
 });
