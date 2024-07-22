@@ -5,6 +5,10 @@ const socket = io();
 const chatMessages = document.getElementById('chatMessages');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
+<<<<<<< HEAD
+=======
+const playSoundButton = document.getElementById('playSoundButton'); // Reference to the Play Sound button
+>>>>>>> origin/feature
 
 // Get reference to the notification sound element
 const notificationSound = document.getElementById('notificationSound');
@@ -53,12 +57,26 @@ socket.on('message', (message) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+// Listen for play-sound event from the server
+socket.on('play-sound', () => {
+  notificationSound.play();
+});
+
+>>>>>>> origin/feature
 // Join the chat room when connected to the server
 socket.on('connect', () => {
   socket.emit('join-room', 'room1'); // Room identifier
 });
 
+<<<<<<< HEAD
 // Play the notification sound manually when the button is clicked
 playSoundButton.addEventListener('click', () => {
   notificationSound.play();
+=======
+// Emit play-sound event to the server when the Play Sound button is clicked
+playSoundButton.addEventListener('click', () => {
+  socket.emit('play-sound', { room: 'room1' });
+>>>>>>> origin/feature
 });

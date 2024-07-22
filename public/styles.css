@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
     background-color: #000;
     font-family: 'Courier New', monospace;
     color: #fff;
@@ -52,3 +53,64 @@ body {
     cursor: pointer;
   }
   
+=======
+  background-color: #000; /* Black background color */
+  font-family: 'Courier New', monospace;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.chat-container {
+  background-color: #404040; /* Greyish background color */
+  border: 2px solid #0e6b0e;
+  border-radius: 8px;
+  width: 80vw; /* Make the container take 80% of the viewport width */
+  height: 60vh; /* Make the container take 60% of the viewport height */
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 128, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  background-color: #404040;
+  color: #fff;
+  height: 80%;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+.chat-input {
+  display: flex;
+  margin-top: auto;
+  padding: 10px;
+  background-color: #404040;
+  border-top: 1px solid #0e6b0e;
+}
+
+#messageInput {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #333; /* Slightly darker grey */
+  color: #fff; /* Text color white */
+}
+
+#sendButton {
+  background-color: #0e6b0e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+>>>>>>> origin/feature
