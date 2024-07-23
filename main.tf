@@ -126,19 +126,20 @@ resource "aws_security_group" "allow_ports" {
 
 #Creating a key pair
 
-resource "aws_key_pair" "TF_key" {
-    key_name   = "TF_key"
-    public_key = tls_private_key.rsa_public_key_openssh
-    }
-
 resource "tls_private_key" "rsa" {
     algorithm = "RSA"
     rsa_bits  = 4096
     }
 
+
+resource "aws_key_pair" "TF_key" {
+    key_name   = "TF_key"
+    public_key = tls_private_key.rsa_public_key_openssh
+    }
+
 resource "local_file" "TF_key" {
     content  = tls_private_key.rsa.private_key_pem
-    filename = "TFkey"
+    filename = "TF_key.pem"
     }
 
 
@@ -148,7 +149,7 @@ resource "aws_instance" "chatapp_server" {
     ami = "ami-0ad21ae1d0696ad58" // find correct AMI in the correct region
     instance_type = "t2.micro"
     availability_zone = "ap-south-1a"
-    key_name = "aws_key_pair.TF_key.id" //created key from aws and saved it in directory
+    key_name = aws_key_pair.TF_key.key_name //created key from aws and saved it in directory
 
     associate_public_ip_address  = true
     subnet_id                    = aws_subnet.subnet-chatapp-1.id
@@ -169,7 +170,7 @@ resource "aws_instance" "chatapp_server" {
     connection {
         type = "ssh"
         user = "ubuntu"
-        private_key = file("TF_key.pem")
+        private_key = file(local_file.TF_key.filename)
         host = self.public_ip
         timeout = "4m"
     }
