@@ -6,20 +6,23 @@ body {
   padding: 0;
   display: flex;
   align-items: center;
+  justify-content: center; /* Keep this line from feature branch */
   height: 100vh;
   overflow: hidden;
 }
 
+
 .chat-container {
-  background-color: #000; /* or #404040 in the second version */
-  border: 2px solid #000080; /* or #0e6b0e in the second version */
+  background-color: #404040; /* Choose the background color you prefer */
+  border: 2px solid #0e6b0e; /* Choose the border color you prefer */
   border-radius: 8px;
-  width: 300px; /* or 80vw in the second version */
-  height: 80vh; /* or 60vh in the second version */
+  width: 80vw; /* Choose the width you prefer */
+  height: 60vh; /* Choose the height you prefer */
   padding: 0;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 128, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 128, 0.5); /* You can keep this line from master branch */
 }
+
 
 .chat-messages {
   background-color: inherit;
@@ -38,10 +41,11 @@ body {
   flex: 1;
   padding: 5px;
   border: none;
-  border-bottom: 1px solid #000080; /* or #0e6b0e in the second version */
-  background-color: inherit;
+  border-bottom: 1px solid #000080; /* or #0e6b0e, choose the border color you prefer */
+  background-color: #333; /* Choose the background color you prefer */
   color: #fff;
 }
+
 
 #sendButton {
   background-color: #000080; /* or #0e6b0e in the second version */
@@ -50,4 +54,14 @@ body {
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+#playSoundButton {
+  background-color: #0e6b0e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
 }

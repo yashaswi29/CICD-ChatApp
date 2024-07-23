@@ -10,7 +10,6 @@ const io = socketIo(server); // Create a socket.io instance using the server
 const INACTIVITY_TIMEOUT = 300000; // 300,000 milliseconds = 5 minutes
 let inactivityTimeout;
 
-// Store active room connections
 const roomConnections = {};
 
 io.on('connection', (socket) => {
@@ -44,10 +43,9 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('any-activity', resetInactivityTimeout); // Custom event to reset the timer on any activity
+  socket.on('any-activity', resetInactivityTimeout);
 });
 
-// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
@@ -55,7 +53,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Handle the root URL with the "index.html" file
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
