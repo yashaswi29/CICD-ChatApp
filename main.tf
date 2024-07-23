@@ -10,8 +10,8 @@
 
 provider "aws" {
     region = "ap-south-1" // choose the region for the terraform deployement
-    access_key = "your_own_aws_generated_access-key"
-    secret_key = "your_own_aws_generated_secret-key"
+    access_key = AWS_ACCESS_KEY_ID
+    secret_key = AWS_SECRET_ACCESS_KEY
 }
 
 # 1. Create VPC
@@ -138,7 +138,7 @@ resource "tls_private_key" "rsa" {
 
 resource "local_file" "TF_key" {
     content  = tls_private_key.rsa.private_key_pem
-    filename = "TF_key.pem"
+    filename = "TFkey"
     }
 
 
