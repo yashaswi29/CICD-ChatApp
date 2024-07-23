@@ -50,7 +50,7 @@ socket.on('connect', () => {
 });
 
 playSoundButton.addEventListener('click', () => {
-  socket.emit('play-sound', { room: 'room1' });
+  socket.emit('play-sound', { room: 'room1' }); // Include room information (optional)
 });
 
 if (Notification.permission !== "granted") {

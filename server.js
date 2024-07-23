@@ -1,11 +1,11 @@
 const express = require('express');
 const http = require('http');
-const socketIo = require('socket.io');
-const path = require('path');
+const socketIo = require('socket.io'); // Import the socket.io library once
+const path = require('path'); // Import the path module
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server); // Create a socket.io instance using the server
 
 const INACTIVITY_TIMEOUT = 300000; // 300,000 milliseconds = 5 minutes
 let inactivityTimeout;
@@ -19,19 +19,19 @@ io.on('connection', (socket) => {
     socket.join(room);
     roomConnections[room] = roomConnections[room] || [];
     roomConnections[room].push(socket);
-    resetInactivityTimeout();
+    resetInactivityTimeout(); // Reset timer on entering a room
   });
 
   socket.on('message', (data) => {
     const { room, message } = data;
     io.to(room).emit('message', message);
-    resetInactivityTimeout();
+    resetInactivityTimeout(); // Reset timer on receiving message
   });
 
   socket.on('play-sound', (data) => {
     const { room } = data;
     io.to(room).emit('play-sound');
-    resetInactivityTimeout();
+    resetInactivityTimeout(); // Reset timer on playing sound
   });
 
   socket.on('disconnect', () => {
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  resetInactivityTimeout();
+  resetInactivityTimeout(); // Reset timer on any request
   next();
 });
 
@@ -60,7 +60,6 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 12345;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  resetInactivityTimeout();
 });
 
 function resetInactivityTimeout() {
