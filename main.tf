@@ -154,7 +154,7 @@ resource "aws_instance" "chatapp_server" {
     subnet_id                    = aws_subnet.subnet-chatapp-1.id
     security_groups              = [aws_security_group.allow_ports.id]
 
-    provisioner "file" {`
+    provisioner "file" {
         source = "/Users/directory/folder/script.sh"
         destination = "/home/ubuntu/script.txt"
     }
