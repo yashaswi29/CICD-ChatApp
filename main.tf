@@ -124,19 +124,37 @@ resource "aws_security_group" "allow_ports" {
 #     depends_on = [aws_internet_gateway.igw-chat]
 #     }
 
+#Creating a key pair
+
+resource "aws_key_pair" "TF_key" {
+    key_name   = "TF-key"
+    public_key = tls_private_key.rsa_public_key_openssh
+    }
+
+resource "tls_private_key" "rsa" {
+    algorithm = "RSA"
+    rsa_bits  = 4096
+    }
+
+resource "local_file" "TF_key" {
+    content  = tls_private_key.rsa.private_key_pem
+    filename = "TF_key.pem"
+    }
+
+
 # 9. Create Ubuntu server and install/git/docker
 
 resource "aws_instance" "chatapp_server" {
-    ami = "ami-0xxxyyyyzzz8" // find correct AMI in the correct region
+    ami = "ami-0ad21ae1d0696ad58" // find correct AMI in the correct region
     instance_type = "t2.micro"
     availability_zone = "ap-south-1a"
-    key_name = "Terra-Mumbai-Key" //created key from aws and saved it in directory
+    key_name = "aws_key_pair.TF_key.id" //created key from aws and saved it in directory
 
     associate_public_ip_address  = true
     subnet_id                    = aws_subnet.subnet-chatapp-1.id
     security_groups              = [aws_security_group.allow_ports.id]
 
-    provisioner "file" {
+    provisioner "file" {`
         source = "/Users/directory/folder/script.sh"
         destination = "/home/ubuntu/script.txt"
     }
@@ -151,7 +169,7 @@ resource "aws_instance" "chatapp_server" {
     connection {
         type = "ssh"
         user = "ubuntu"
-        private_key = file("/Users/directory/folder/Terra-Mumbai-Key.pem")
+        private_key = file("TF_key.pem")
         host = self.public_ip
         timeout = "4m"
     }
