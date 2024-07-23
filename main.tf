@@ -127,7 +127,7 @@ resource "aws_security_group" "allow_ports" {
 #Creating a key pair
 
 resource "aws_key_pair" "TF_key" {
-    key_name   = "TF-key"
+    key_name   = "TF_key"
     public_key = tls_private_key.rsa_public_key_openssh
     }
 
