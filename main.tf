@@ -10,8 +10,6 @@
 
 provider "aws" {
     region = "ap-south-1" // choose the region for the terraform deployement
-    access_key = AWS_ACCESS_KEY_ID
-    secret_key = AWS_SECRET_ACCESS_KEY
 }
 
 # 1. Create VPC
