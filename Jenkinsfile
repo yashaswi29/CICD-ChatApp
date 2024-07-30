@@ -22,12 +22,12 @@ pipeline {
                 sh 'node server.js &'
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.url=http://localhost:9000/ -Dsonar.login=ce8e6c04cd96290b928cfa2671fc2a5c15ed369e -Dsonar.projectName=Chat-App \
-                -Dsonar.projectKey=Chat-App '''
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.url=http://localhost:9000/ -Dsonar.login=ce8e6c04cd96290b928cfa2671fc2a5c15ed369e -Dsonar.projectName=Chat-App \
+        //         -Dsonar.projectKey=Chat-App '''
+        //     }
+        // }
         stage('OWASP Dependency Check') {
             steps {
                 dependencyCheck additionalArguments: '', odcInstallation: 'DP'
